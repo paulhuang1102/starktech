@@ -1,3 +1,5 @@
+import { StockMeta } from "@/app/types";
+import { getYearlyGrowthRate } from "@/app/utils/calulator";
 import { useEffect, useState } from "react";
 
 interface IStackDataParam {
@@ -20,8 +22,32 @@ const useStock = ({ id, start, end }: IStackDataParam) => {
         );
 
         const json = await res.json();
+        const { data } = json as { data: StockMeta[] };
 
-        return json;
+        // Calculate year-over-year growth rate for monthly revenue
+        for (let i = data.length - 1; i >= 0; i--) {
+          if (i == 0) {
+            data[i].MoM = 0;
+            continue;
+          }
+          for (let j = i - 1; j >= 0; j--) {
+            if (
+              data[j].revenue_year === data[i].revenue_year - 1 &&
+              data[j].revenue_month === data[i].revenue_month
+            ) {
+              data[i].MoM = getYearlyGrowthRate(
+                data[i].revenue,
+                data[j].revenue
+              );
+            }
+          }
+
+          if (data[i].MoM === undefined) {
+            data[i].MoM = 0;
+          }
+        }
+
+        setData(json.data);
       } catch (error) {
         setError(error as Error);
       } finally {

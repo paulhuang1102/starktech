@@ -13,7 +13,6 @@ const YearSelect: React.FC<IProps> = ({ year, handleChange }) => {
       labelId="demo-simple-select-label"
       id="demo-simple-select"
       value={year.toString()}
-      label="Year"
       onChange={(e) => handleChange(parseInt(e.target.value))}
     >
       <MenuItem value={3}>3</MenuItem>
