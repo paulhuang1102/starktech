@@ -22,6 +22,9 @@ const RevenueChart: React.FC<IProps> = ({ stockData }) => {
         axisPointer: {
           type: "cross",
         },
+        textStyle: {
+          align: "left",
+        },
       },
       xAxis: [
         {
@@ -72,11 +75,10 @@ const RevenueChart: React.FC<IProps> = ({ stockData }) => {
           axisLabel: {
             formatter: "{value}",
           },
-          boundaryGap: [0, '100%']
-
+          boundaryGap: [0, "100%"],
         },
       ],
-    
+
       series: [
         {
           name: "revenue",
@@ -88,14 +90,15 @@ const RevenueChart: React.FC<IProps> = ({ stockData }) => {
           type: "line",
           data: stockData.map((d) => d.MoM),
           yAxisIndex: 1,
-
         },
       ],
     };
 
     if (!chartRef.current) {
       // chartRef.current.dispose();
-      chartRef.current = echarts.init(document.getElementById("chart-container"));
+      chartRef.current = echarts.init(
+        document.getElementById("chart-container")
+      );
     }
 
     chartRef.current.setOption(option);

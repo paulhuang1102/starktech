@@ -1,3 +1,6 @@
 export const getYearlyGrowthRate = (revenue: number, lastRevenue: number) => {
-    return ((revenue / lastRevenue - 1) * 100);
+  const rate = (revenue / lastRevenue - 1) * 100;
+
+  // Round the number to the second decimal place
+  return Math.round(rate * 100) / 100;
 };

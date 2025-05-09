@@ -55,14 +55,14 @@ const PerformanceTable: React.FC<IProps> = ({ stocks }) => {
               <TableRow>
                 {stocks.map((s) => (
                   <TableCell key={s.date}>
-                    {s.revenue_year}/{s.revenue_month}
+                    {s.revenue_year}/{s.revenue_month.toString().padStart(2, "0")}
                   </TableCell>
                 ))}
               </TableRow>
 
               <TableRow>
                 {stocks.map((s) => (
-                  <TableCell key={s.date}>{s.revenue}</TableCell>
+                  <TableCell key={s.date}>{s.revenue.toLocaleString()}</TableCell>
                 ))}
               </TableRow>
 
