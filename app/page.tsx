@@ -1,8 +1,7 @@
 import { Box, Container } from "@mui/material";
 import StockContainer from "./features/stock/components/container";
 import { fetchStockById } from "./api/stock";
-
-const DEFAULT_ID = "2867";
+import { DEFAULT_ID } from "./const";
 
 export default async function Home({
   searchParams,
@@ -48,7 +47,7 @@ export default async function Home({
         </Box>
 
         <Box>
-          <StockContainer />
+          <StockContainer id={id} />
         </Box>
       </Container>
     </Box>

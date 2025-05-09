@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeRegistry from "./components/theme-registry";
+import { AppBar } from "@mui/material";
+import SearchInput from "./features/stock/components/search-input";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeRegistry>{children}</ThemeRegistry>
+        <ThemeRegistry>
+          <AppBar sx={{ padding: "1rem", marginBottom: "2rem" }} position="static">
+            <SearchInput />
+          </AppBar>
+          {children}
+        </ThemeRegistry>
       </body>
     </html>
   );

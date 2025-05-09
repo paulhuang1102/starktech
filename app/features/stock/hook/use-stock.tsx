@@ -1,3 +1,4 @@
+import { endpoint } from "@/app/const";
 import { StockMeta } from "@/app/types";
 import { getYearlyGrowthRate } from "@/app/utils/calulator";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ const useStock = ({ id, start, end }: IStackDataParam) => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockMonthRevenue&data_id=${id}&token=${process.env.NEXT_PUBLIC_FINMIND_API_TOKEN}&start_date=${start}&end_date=${end}`
+          `${endpoint}?dataset=TaiwanStockMonthRevenue&data_id=${id}&token=${process.env.NEXT_PUBLIC_FINMIND_API_TOKEN}&start_date=${start}&end_date=${end}`
         );
 
         const json = await res.json();

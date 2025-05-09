@@ -1,3 +1,6 @@
+import { endpoint } from "../const";
+import { StockInfo } from "../types";
+
 type APIResponse<T> = {
   success: boolean;
   data?: T;
@@ -6,10 +9,10 @@ type APIResponse<T> = {
 
 export const fetchStockById = async (
   id: string
-): Promise<APIResponse<{ stock_id: string; stock_name: string }>> => {
+): Promise<APIResponse<StockInfo>> => {
   try {
     const res = await fetch(
-      `https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo&data_id=${id}&token=${process.env.NEXT_PUBLIC_FINMIND_API_TOKEN}`
+      `${endpoint}?dataset=TaiwanStockInfo&data_id=${id}&token=${process.env.NEXT_PUBLIC_FINMIND_API_TOKEN}`
     );
 
     const json = await res.json();

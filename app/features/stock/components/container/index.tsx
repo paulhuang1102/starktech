@@ -14,13 +14,17 @@ import {
 import YearSelect from "@/app/components/year-select";
 import RevenueChart from "@/app/features/chart/components/revenue-chart";
 import PerformanceTable from "../performance-table";
+import { DEFAULT_YEARS } from "@/app/const";
 
-const StockContainer = () => {
+interface IProps {
+  id: string;
+}
+
+const StockContainer: React.FC<IProps> = ({ id }) => {
   const now = new Date();
   const yearsBefore = new Date();
 
-  // TODO: 5 should be from props
-  yearsBefore.setFullYear(now.getFullYear() - 5);
+  yearsBefore.setFullYear(now.getFullYear() - DEFAULT_YEARS);
 
   const [startDate, setStartDate] = useState(
     timestampToDateString(yearsBefore.getTime())
@@ -31,7 +35,7 @@ const StockContainer = () => {
   const [endDate, setEndDate] = useState(timestampToDateString(now.getTime()));
 
   const { data, isLoading, error } = useStock({
-    id: "2867",
+    id,
     start: startDate,
     end: endDate,
   });

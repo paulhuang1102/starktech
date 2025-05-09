@@ -7,3 +7,9 @@ export type StockMeta = {
   revenue_year: number;
   MoM: number;
 };
+
+export type StockInfo = {
+  stock_id: string;
+  stock_name: string;
+  industry_category: string;
+};
